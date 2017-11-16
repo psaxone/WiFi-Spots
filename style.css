@@ -1,0 +1,68 @@
+html,body {
+    height: 100%;
+    width: 100%;
+}
+
+#div-button {
+    padding: 20px 0px 65px 15px;
+}
+
+.fa {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+#boton-geo {
+    position: absolute;
+    background-color: rgb(59, 119, 250);
+    border: none;
+    color: white;
+    padding: 14px 10px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    right: 0px;
+    top: 20px
+}
+
+#boton-buscar {
+    position: absolute;
+    right: 183px;
+    background-color: rgb(59, 119, 250);
+    border: none;
+    color: white;
+    padding: 14px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 12px 160px 12px 40px;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    /* filter: blur(8px); */
+}
+
+#map1 {
+    height: 100%;
+    width: 100%;
+}
+
+
+#div-container {
+    height: calc(100% - 76px);
+    width: 100%;
+    position: absolute;
+}
+

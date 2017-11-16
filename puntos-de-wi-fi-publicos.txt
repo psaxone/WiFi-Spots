@@ -1,0 +1,8 @@
+Nombre: Puntos de Wi-Fi Públicos
+ Descripcion: <p>Listado de los puntos de red de conexi&oacute;n a internet inal&aacute;mbrica gratuita ubicados en plazas, parques, sedes comunales y bibliotecas de la Ciudad de Buenos Aires.</p>
+
+ Notas: 
+ Categorias:  Infraestructura y Obra Pública
+ Etiquetas:  mapa servicios espacio-público urbanismo wifi comunicación internet turismo USIG
+ Publicacion: Mon Feb 20 2017 11:27:07 GMT-0300 (ART)
+ Ultima modificacion: Mon Feb 20 2017 11:27:07 GMT-0300 (ART)
