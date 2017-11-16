@@ -53,31 +53,6 @@ function initMap() {
     });
     map.setOptions({minZoom: 12})
 }
-
-// function manualInput() {
-//     var input = document.getElementById('direccion');
-//     autocomplete = new google.maps.places.Autocomplete(input);
-//     map.setZoom(16);
-//     map.panTo(uluru);
-//     updateMap()
-// }
-
-// function geoLoc() {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//         var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
-//         if (marker === null){
-//             marker = new google.maps.Marker({
-//                  position: uluru,
-//                  map: map,
-//             })
-//          } else {
-//              marker.setPosition(uluru)
-//          }
-//         map.setZoom(16);
-//         map.panTo(uluru);
-//         updateMap()
-//     })
-// }
  
 function updateMap() {
     $.get('./sitios-de-wifi.csv', function( csvString ){
@@ -101,9 +76,3 @@ function updateMap() {
         })
     });
 }
-
-
-
-
-
-
