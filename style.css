@@ -1,3 +1,7 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
 html,body {
     height: 100%;
     width: 100%;
@@ -39,13 +43,13 @@ html,body {
 }
 
 input[type=text] {
-    width: 100%;
+    width: calc(100% - 180px);
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    padding: 12px 160px 12px 40px;
+    padding: 12px 180px 12px 40px;
 }
 
 #map {

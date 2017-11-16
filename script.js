@@ -24,34 +24,37 @@ $(document).ready(function() {
 
 
 function initMap() {
-    var uluru = {lat: -34.6327549, lng: -58.4429133};
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
-      center: uluru
-    });
+    $.get('./mapstyle.json', function( styles ){
+        var uluru = {lat: -34.6327549, lng: -58.4429133};
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: uluru,
+            styles: styles
+        });
 
-    var defaultBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(-34.729028, -58.668477),
-        new google.maps.LatLng(-34.521096, -58.203274));
-      var options = {
-        bounds: defaultBounds,
-        types: ['geocode']
-      };
-    autocomplete = new google.maps.places.Autocomplete(document.getElementById('direccion'), options);
-    autocomplete.addListener('place_changed', function() {
-        var place = autocomplete.getPlace();
-        var lat = place.geometry.location.lat();
-        var lng = place.geometry.location.lng();
-        var coord = new google.maps.LatLng(lat,lng);
-        marker = new google.maps.Marker({
-            position: coord,
-            map: map
-        })
-        map.setZoom(16);
-        map.panTo(coord);
-        updateMap()
-    });
-    map.setOptions({minZoom: 12})
+        var defaultBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(-34.729028, -58.668477),
+            new google.maps.LatLng(-34.521096, -58.203274));
+        var options = {
+            bounds: defaultBounds,
+            types: ['geocode']
+        };
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('direccion'), options);
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            var lat = place.geometry.location.lat();
+            var lng = place.geometry.location.lng();
+            var coord = new google.maps.LatLng(lat,lng);
+            marker = new google.maps.Marker({
+                position: coord,
+                map: map
+            })
+            map.setZoom(16);
+            map.panTo(coord);
+            updateMap()
+        });
+        map.setOptions({minZoom: 12})
+    })
 }
  
 function updateMap() {
@@ -67,7 +70,7 @@ function updateMap() {
                 map: map,
                 icon: {
                     path: google.maps.SymbolPath.CIRCLE,
-                    scale: 8.5,
+                    scale: 10,
                     fillColor: "yellow",
                     fillOpacity: 0.7,
                     strokeWeight: 0.7
