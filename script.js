@@ -1,14 +1,24 @@
 var map = null
 var marker = null
+var autocomplete = null;
 
 $(document).ready(function() {
-    $("#boton-geo").click(function(){
-        geoLoc();
-    });
-    $("#boton-buscar").click(function() {
-        // var direccion = $("#direccion").val();
-    })
-    
+    $("#boton-geo").click(function(geoLoc){
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
+            if (marker === null){
+                marker = new google.maps.Marker({
+                     position: uluru,
+                     map: map,
+                })
+             } else {
+                 marker.setPosition(uluru)
+             }
+            map.setZoom(16);
+            map.panTo(uluru);
+            updateMap()
+        })
+    });  
 })
 
 
@@ -19,33 +29,63 @@ function initMap() {
       zoom: 12,
       center: uluru
     });
+
+    var defaultBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(-34.729028, -58.668477),
+        new google.maps.LatLng(-34.521096, -58.203274));
+      var options = {
+        bounds: defaultBounds,
+        types: ['geocode']
+      };
+    autocomplete = new google.maps.places.Autocomplete(document.getElementById('direccion'), options);
+    autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+        var coord = new google.maps.LatLng(lat,lng);
+        marker = new google.maps.Marker({
+            position: coord,
+            map: map
+        })
+        map.setZoom(16);
+        map.panTo(coord);
+        updateMap()
+    });
+    map.setOptions({minZoom: 12})
 }
 
-function geoLoc() {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
-        if (marker === null){
-            marker = new google.maps.Marker({
-                 position: uluru,
-                 map: map,
-            })
-         } else {
-             marker.setPosition(uluru)
-         }
-        
-        map.setZoom(16);
-        map.panTo(uluru);
-        updateMap()
-    })
-}
+// function manualInput() {
+//     var input = document.getElementById('direccion');
+//     autocomplete = new google.maps.places.Autocomplete(input);
+//     map.setZoom(16);
+//     map.panTo(uluru);
+//     updateMap()
+// }
+
+// function geoLoc() {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//         var uluru = {lat: position.coords.latitude, lng: position.coords.longitude};
+//         if (marker === null){
+//             marker = new google.maps.Marker({
+//                  position: uluru,
+//                  map: map,
+//             })
+//          } else {
+//              marker.setPosition(uluru)
+//          }
+//         map.setZoom(16);
+//         map.panTo(uluru);
+//         updateMap()
+//     })
+// }
  
 function updateMap() {
     $.get('./sitios-de-wifi.csv', function( csvString ){
         var data = $.csv.toObjects(csvString)
-        console.log(data)
         data.forEach(function(item) {
             var lat = Number(item.LAT)
             var lng = Number(item.LNG)
+            map.setOptions({minZoom: 15})
             var latLng = new google.maps.LatLng(lat,lng);
             var marker = new google.maps.Marker({
                 position: latLng,
@@ -53,24 +93,17 @@ function updateMap() {
                 icon: {
                     path: google.maps.SymbolPath.CIRCLE,
                     scale: 8.5,
-                    fillColor: "#F00",
-                    fillOpacity: 0.4,
-                    strokeWeight: 0.4
-                }    
+                    fillColor: "yellow",
+                    fillOpacity: 0.7,
+                    strokeWeight: 0.7
+                },
             });
         })
     });
 }
 
 
-//  var defaultBounds = new google.maps.LatLngBounds(
-//     new google.maps.LatLng(-33.8902, 151.1759),
-//     new google.maps.LatLng(-33.8474, 151.2631));
-  
-//   var input = document.getElementById('searchTextField');
-//   var options = {
-//     bounds: defaultBounds,
-//     types: ['geocode']
-//   };
-  
-//   autocomplete = new google.maps.places.Autocomplete(input, options);
+
+
+
+
