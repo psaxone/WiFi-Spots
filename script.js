@@ -65,6 +65,9 @@ function updateMap() {
             var lng = Number(item.LNG)
             map.setOptions({minZoom: 15})
             var latLng = new google.maps.LatLng(lat,lng);
+            var infowindow = new google.maps.InfoWindow({
+                content: getInfo(item.DIRECCION_, item.BARRIO, item.COMUNA, item.ESTADO)
+              });
             var marker = new google.maps.Marker({
                 position: latLng,
                 map: map,
@@ -73,9 +76,25 @@ function updateMap() {
                     scale: 10,
                     fillColor: "yellow",
                     fillOpacity: 0.7,
-                    strokeWeight: 0.7
+                    strokeWeight: 0.7,
                 },
             });
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+              });
         })
     });
 }
+
+function getInfo(direccion, barrio, comuna, estado) {
+    return (
+        `<div class="infowindow">
+            <h2>${direccion}</h2>
+            <h4>${barrio.toLowerCase()}, ${comuna.toLowerCase()}</h4>
+            <p>Estado: ${estado.toLowerCase()}</p>
+        </div>`
+    )
+}
+
+// string1 = 'hola '+variable+', '+variable2
+// string2 = `hola ${variable}, ${variable2}`

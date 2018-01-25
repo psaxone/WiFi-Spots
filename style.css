@@ -70,3 +70,14 @@ input[type=text] {
     position: absolute;
 }
 
+.infowindow h2 {
+    font-weight: bold;
+}
+
+.infowindow h4 {
+    text-transform: capitalize;
+}
+
+.infowindow p {
+    text-transform: capitalize;
+}
